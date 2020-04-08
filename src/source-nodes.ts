@@ -3,6 +3,7 @@ import {
   constructS3UrlForAsset,
   createS3AssetNode,
   createS3Instance,
+  buildAwsEndpoint,
 } from './utils'
 import { S3Object } from './types/S3Object'
 
@@ -106,15 +107,14 @@ export const sourceNodes = async (
     secretAccessKey,
     bucketName,
     // ================
-    domain = 's3.amazonaws.com',
     region = 'us-east-1',
+    domain = buildAwsEndpoint(region),
     protocol = 'http',
     publicDomain,
     includeMetadata = false,
   }: SourceS3Options
 ) => {
   const { createNode } = actions
-
   const s3: S3 = createS3Instance({ accessKeyId, domain, secretAccessKey })
   const s3Entities = await fetchBucketItems(bucketName, includeMetadata, s3)
 

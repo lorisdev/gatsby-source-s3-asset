@@ -100,3 +100,5 @@ export const createS3AssetNode = ({
     },
   })
 }
+
+export const buildAwsEndpoint = (region: string) => `s3.${region}.amazonaws.com`
